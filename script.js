@@ -1,43 +1,16 @@
 console.log("Welcome to notes app!")
 
-let notes = []
+const notes = getSavedNotes()
 
 const filters = {
     searchText: ''
 }
 
-const notesJSON = localStorage.getItem('notes')
-
-if(notesJSON !== null){
-    notes = JSON.parse(notesJSON)
-}
-
-const renderNotes = function(notes, filters){
-    const filterNotes = notes.filter(function(note){
-        return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
-    })
-
-    document.querySelector('#notes').innerHTML = ''
-
-    filterNotes.forEach(function(note){
-        const noteEl = document.createElement('p')
-        if(note.title.length > 0){
-            noteEl.textContent = note.title
-        } else{
-            noteEl.textContent = 'Unnamed note'
-        }
-        document.querySelector('#notes').appendChild(noteEl)
-    })
-}
-
 renderNotes(notes, filters)
-
-// document.querySelector('button').addEventListener('click', function(){
-//     console.log('you clicked me!')
-// })
 
 document.querySelector('#create-note').addEventListener('click', function(e){
     notes.push({
+        id: uuidv4(),
         title: '',
         body: ''
     })
@@ -50,12 +23,11 @@ document.querySelector('#search-text').addEventListener('input', function(e){
     renderNotes(notes, filters)
 })
 
+
+
 // document.querySelector('#filter-by').addEventListener('change', function(e){
 //     console.log(e.target.value)
 // })
-
-
-
 
 // document.querySelector('#remove-all').addEventListener('click', function (e) {
 //     document.querySelectorAll('.note').forEach(function(note){
@@ -71,4 +43,8 @@ document.querySelector('#search-text').addEventListener('input', function(e){
 
 // document.querySelector('#for-fun').addEventListener('change', function (e) {
 //     console.log(e.target.checked)
+// })
+
+// document.querySelector('button').addEventListener('click', function(){
+//     console.log('you clicked me!')
 // })
