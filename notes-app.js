@@ -1,6 +1,6 @@
 console.log("Welcome to notes app!")
 
-const notes = getSavedNotes()
+let notes = getSavedNotes()
 
 const filters = {
     searchText: ''
@@ -9,19 +9,30 @@ const filters = {
 renderNotes(notes, filters)
 
 document.querySelector('#create-note').addEventListener('click', function(e){
+    const id = uuidv4()
     notes.push({
-        id: uuidv4(),
+        id: id,
         title: '',
         body: ''
     })
-    localStorage.setItem('notes', JSON.stringify(notes))
-    renderNotes(notes, filters)
+    saveNotes(notes)
+    location.assign(`/ES6/notes-app/edit.html#${id}`)
 })
 
 document.querySelector('#search-text').addEventListener('input', function(e){
     filters.searchText = e.target.value
     renderNotes(notes, filters)
 })
+
+window.addEventListener('storage', function(e){
+    if(e.key === 'notes'){
+        notes = JSON.parse(e.newValue)
+        renderNotes(notes, filters)
+    }
+})
+
+const now = new Date()
+console.log(now.toString())
 
 
 

@@ -1,5 +1,3 @@
-console.log(uuidv4())
-
 // read existing nates from localstorage
 const getSavedNotes = function(){
     const notesJSON = localStorage.getItem('notes')
@@ -28,11 +26,11 @@ const removeNote = function(id){
 // generate DOM element
 const generateNoteDOM = function(note){
     const noteEl = document.createElement('div')
-    const textEl = document.createElement('span')
+    const textEl = document.createElement('a')
     const button = document.createElement('button')
 
     // setup the remove note button
-    button.textContent = 'X'
+    button.textContent = 'x'
     noteEl.appendChild(button)
     button.addEventListener('click', function(){
         removeNote(note.id)
@@ -46,6 +44,7 @@ const generateNoteDOM = function(note){
     } else {
         textEl.textContent = 'Unnamed note'
     }
+    textEl.setAttribute('href', `/ES6/notes-app/edit.html#${note.id}`)
     noteEl.appendChild(textEl)
 
     return noteEl
