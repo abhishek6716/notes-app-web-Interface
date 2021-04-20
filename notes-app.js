@@ -3,17 +3,21 @@ console.log("Welcome to notes app!")
 let notes = getSavedNotes()
 
 const filters = {
-    searchText: ''
+    searchText: '',
+    sortBy: 'byEdited'
 }
 
 renderNotes(notes, filters)
 
 document.querySelector('#create-note').addEventListener('click', function(e){
     const id = uuidv4()
+    const timestamp = moment().valueOf()
     notes.push({
         id: id,
         title: '',
-        body: ''
+        body: '',
+        createdAt: timestamp,
+        updatedAt: timestamp,
     })
     saveNotes(notes)
     location.assign(`/ES6/notes-app/edit.html#${id}`)
@@ -24,6 +28,11 @@ document.querySelector('#search-text').addEventListener('input', function(e){
     renderNotes(notes, filters)
 })
 
+document.querySelector('#filter-by').addEventListener('change', function (e) {
+    filters.sortBy = e.target.value
+    renderNotes(notes, filters)
+})
+
 window.addEventListener('storage', function(e){
     if(e.key === 'notes'){
         notes = JSON.parse(e.newValue)
@@ -31,14 +40,28 @@ window.addEventListener('storage', function(e){
     }
 })
 
-const now = new Date()
-console.log(now.toString())
 
 
+// const now = moment()
+// console.log(now.toString())
+// now.minute(40)
+// console.log(now.toString())
 
-// document.querySelector('#filter-by').addEventListener('change', function(e){
-//     console.log(e.target.value)
-// })
+// const now = new Date()
+// const timestamp = now.getTime()
+
+// const myDate = new Date(timestamp)
+// console.log(myDate.getFullYear())
+
+// console.log(now.toString())
+// console.log(`Year: ${now.getFullYear()}`)
+// console.log(`Month: ${now.getMonth()}`)
+// console.log(`Day of month: ${now.getDate()}`)
+// console.log(`Hour: ${now.getHours()}`)
+// console.log(`Minute: ${now.getMinutes()}`)
+// console.log(`Second: ${now.getSeconds()}`)
+
+
 
 // document.querySelector('#remove-all').addEventListener('click', function (e) {
 //     document.querySelectorAll('.note').forEach(function(note){
