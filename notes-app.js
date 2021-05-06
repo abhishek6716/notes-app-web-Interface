@@ -1,3 +1,5 @@
+'use strict'
+
 console.log("Welcome to notes app!")
 
 let notes = getSavedNotes()
