@@ -5,21 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes-App</title>
+    <link href="./styles/style.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Notes App</h1>
-    <h2>Take notes and never forget!</h2>
-    <input id="search-text" type="text" placeholder="Filter Notes">
-    <select id="filter-by">
-        <option value="byEdited">Sort by last edited</option>
-        <option value="byCreated">Sort by recently created</option>
-        <option value="alphabetical">Sort alphabetically</option>
-    </select>
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title">Notes App</h1>
+            <h2 class="header__subtitle">Take notes and never forget!</h2>
+        </div>
+    </header>
+    <div class="actions">
+        <div class="actions__container">
+            <input id="search-text" class="input" type="text" placeholder="Filter Notes">
+            <select id="filter-by" class="dropdown">
+                <option value="byEdited">Sort by last edited</option>
+                <option value="byCreated">Sort by recently created</option>
+                <option value="alphabetical">Sort alphabetically</option>
+            </select>
+        </div>
+    </div>
     <div id="notes"></div>
     <button id="create-note">Create note</button>
-    <script src="uuid.js"></script>
+    <script src="./scripts/uuid.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
-    <script src="notes-fxn.js"></script>
-    <script src="notes-app.js"></script>
+    <script src="./scripts/notes-fxn.js"></script>
+    <script src="./scripts/notes-app.js"></script>
 </body>
 </html>
